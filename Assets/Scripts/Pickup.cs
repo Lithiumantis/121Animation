@@ -31,7 +31,7 @@ public class Pickup : MonoBehaviour
             Debug.Log("Hit pickup");
             Destroy(other.gameObject);
 
-            if(score >= 1)
+            if(score >= 5)
             {
                 StartCoroutine(Delay());
             }
