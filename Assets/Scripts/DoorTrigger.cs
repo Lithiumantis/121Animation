@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
 {
+    public GameObject playerReference;
+    private Pickup pickupScript;
 
     public GameObject door;
     private new Animation animation;
     public int doorNumber;
+    public int requiredScore = 0;
     string moveName;
     string closeName;
     // Start is called before the first frame update
     void Start()
     {
         animation = door.GetComponent<Animation>();
+        pickupScript = playerReference.GetComponent<Pickup>();
 
         MeshRenderer rend = GetComponent<MeshRenderer>();
         rend.enabled = false;
@@ -30,7 +34,7 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && pickupScript.score >= requiredScore)
         {
             animation.Play(moveName);
         }
@@ -38,7 +42,7 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && pickupScript.score >= requiredScore)
         {
             animation.Play(closeName);
         }
