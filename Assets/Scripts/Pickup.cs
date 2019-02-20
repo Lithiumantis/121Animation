@@ -29,9 +29,15 @@ public class Pickup : MonoBehaviour
             audioplayer.Play();
             scoreText.text = "Score: " + score;
             Debug.Log("Hit pickup");
-            Destroy(other.gameObject);
 
-            if(score >= 5)
+            ParticleSystem pickupParticle = other.gameObject.GetComponent<ParticleSystem>();
+            pickupParticle.Play();
+            //Destroy(other.gameObject);
+            other.gameObject.GetComponent<MeshRenderer>().enabled = false;
+            other.gameObject.GetComponent<BoxCollider>().enabled = false;
+            other.gameObject.GetComponent<Animation>().Stop();
+
+            if (score >= 5)
             {
                 StartCoroutine(Delay());
             }
